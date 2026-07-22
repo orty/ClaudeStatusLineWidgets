@@ -56421,7 +56421,7 @@ var init_ink = __esm({
           if (sync) {
             this.options.stdout.write(bsu);
           }
-          this.options.stdout.write(base_exports.clearTerminal + this.fullStaticOutput + output);
+          this.options.stdout.write(base_exports.clearTerminal + this.fullStaticOutput + outputToRender);
           this.lastOutput = output;
           this.lastOutputToRender = outputToRender;
           this.lastOutputHeight = outputHeight;
