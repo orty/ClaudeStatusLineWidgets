@@ -56421,7 +56421,7 @@ var init_ink = __esm({
           if (sync) {
             this.options.stdout.write(bsu);
           }
-          this.options.stdout.write(base_exports.clearTerminal + this.fullStaticOutput + output);
+          this.options.stdout.write(base_exports.clearTerminal + this.fullStaticOutput + outputToRender);
           this.lastOutput = output;
           this.lastOutputToRender = outputToRender;
           this.lastOutputHeight = outputHeight;
@@ -58965,6 +58965,10 @@ function getCredentialsPath() {
   const configDir = process.env.CLAUDE_CONFIG_DIR ?? join(homedir(), ".claude");
   return join(configDir, ".credentials.json");
 }
+function decodeCredentialPayload(raw) {
+  const isHex = raw.length > 0 && raw.length % 2 === 0 && /^[0-9a-fA-F]+$/.test(raw);
+  return isHex ? Buffer.from(raw, "hex").toString("utf-8") : raw;
+}
 function readCredentials() {
   if (process.env.CLAUDE_CODE_OAUTH_TOKEN) {
     return {
@@ -58978,13 +58982,12 @@ function readCredentials() {
   const plat = platform();
   if (plat === "darwin") {
     try {
-      const hex = execSync(
+      const raw = execSync(
         'security find-generic-password -a "$(whoami)" -w -s "Claude Code-credentials"',
         { timeout: 2e3, stdio: ["pipe", "pipe", "pipe"] }
       ).toString().trim();
-      if (hex) {
-        const json = Buffer.from(hex, "hex").toString("utf-8");
-        return JSON.parse(json);
+      if (raw) {
+        return JSON.parse(decodeCredentialPayload(raw));
       }
     } catch {
     }

@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/JerrettDavis/ClaudeStatusLineWidgets/compare/v1.5.3...v1.5.4) (2026-07-24)
+
+
+### Bug Fixes
+
+* **usage:** handle plain-JSON macOS keychain credentials ([#50](https://github.com/JerrettDavis/ClaudeStatusLineWidgets/issues/50)) ([291b358](https://github.com/JerrettDavis/ClaudeStatusLineWidgets/commit/291b358c811293fbb715b5c915513a30cba7de72))
+
 ## [1.5.3](https://github.com/JerrettDavis/ClaudeStatusLineWidgets/compare/v1.5.2...v1.5.3) (2026-06-23)
 
 
